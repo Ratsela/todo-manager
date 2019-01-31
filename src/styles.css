@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+body{
+    
+}
+.primary-container {
+    padding-top: 10px;
+}
+
+.todos {
+    margin-top: 3%;
+}
+
+.list {
+    margin-top: 2%;
+}
+
+.main {
+    border-style: solid;
+    border-color:bisque;
+}
+
+.page-controls {
+    margin-top: 2%; 
+}

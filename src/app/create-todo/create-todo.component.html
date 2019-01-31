@@ -1,0 +1,56 @@
+<div class="container primary-container">
+    <div class="main">
+      <h3>Create Todo</h3>
+      <form>
+        <div class="form-group">
+          <div class="row title">
+            <div class="col-2">
+              <input type="text" class="form-control" name="title" placeholder="Title" #title>
+            </div>
+            
+          </div>
+
+          <div class="row category">
+              <div class="col-2">
+                  <select class="form-control" id="category" name="category"
+                        (change)="selectCategory($event.target.value)">
+                  <option value="HOME">Home</option>
+                  <option value="HEALTH">Health</option>
+                  <option value="DELEGATE">Delegate</option>
+                </select>
+              </div>
+          </div>
+
+          <div class="row desc">
+            <div class="col-6">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Description" #description>
+            </div>
+          </div>
+
+          <div class="row dueDate">
+            <div class="col-4">
+                <ngb-datepicker #d (select)="onDateSelect($event)"></ngb-datepicker>
+
+                <!--<div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control" placeholder="yyyy-mm-dd" id="dueDate"
+                      name="sdp" ngbDatepicker #dpFrom="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn calendar-button" (click)="dpFrom.toggle()" type="button">
+                          <i class="far fa-calendar"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>-->
+            </div>
+          </div>
+
+          <div class="row status">
+            <div class="col-2">
+                <button class="btn btn-success btn-sm" (click)="saveTodo(title.value,description.value)">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container primary-container">
+    <div class="main">
+      <h3>Edit Todo</h3>
+      <form>
+        <div class="form-group">
+          <div class="row title">
+            <div class="col-2" >
+              <input type="text" class="form-control" name="title" placeholder="Title" value="{{todo.title}}" #title>
+            </div>
+            
+          </div>
+
+          <div class="row category">
+              <div class="col-2" >
+                  <select class="form-control" id="category" name="category"
+                        (change)="selectCategory($event.target.value)">
+                  <option value="0">{{todo.category}}</option>
+                  <option value="HOME">Home</option>
+                  <option value="HEALTH">Health</option>
+                  <option value="DELEGATE">Delegate</option>
+                </select>
+              </div>
+          </div>
+
+          <div class="row desc" >
+            <div class="col-6">
+                <input type="text" class="form-control" id="description" name="description" value="{{todo.description}}" placeholder="Description" #description>
+            </div>
+          </div>
+
+          <div class="row dueDate">
+            <div class="col-4">
+                <ngb-datepicker #d (select)="onDateSelect($event)"></ngb-datepicker>
+            </div>
+          </div>
+
+          <div class="row status">
+            <div class="col-2">
+                <button class="btn btn-success btn-sm" (click)="saveTodo(title.value,description.value)">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>

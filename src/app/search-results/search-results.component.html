@@ -1,0 +1,25 @@
+<div class="container primary-container">
+    <div class="main">
+        <h3>Search results by {{searchedBy}}</h3>
+        <h4>{{todos.length}} Todos found</h4>
+
+
+        <div class="row todos" *ngIf="todos.length > 0">
+            <div class="col-2">Title</div>
+            <div class="col-2">Category</div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row list" *ngFor="let todo of todos">
+            <div class="col-2">
+              <a href="#" (click)="openTodo(todo.id)">{{todo.title}}</a>
+            </div>
+            <div class="col-2">
+              {{todo.category}}
+            </div>
+            <div class="col-2"><button type="button" class="btn btn-danger btn-sm" (click)="deleteTodo(todo.id)">Delete</button></div>
+            <div class="col-2"><button type="button" class="btn btn-info btn-sm" (click)="editTodo(todo.id)">Edit</button></div>
+          </div>
+    </div>
+</div>

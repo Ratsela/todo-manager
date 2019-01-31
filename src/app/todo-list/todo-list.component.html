@@ -1,0 +1,134 @@
+<div class="container primary-container">
+    <div class="main">
+        <h3>Todos</h3>
+        <div class="row">
+            <!--If checked, search by title otherwise search by category-->
+            <div class="col-2 search">
+                <label>
+                    <input type="checkbox" (change)="searchCheck( $event.target.checked)" />
+                    Search by title
+                 </label>
+            </div>
+            <div class="col-8"></div>
+            <div class="col-2">
+                <a type="button" class="btn btn-success" [routerLink]="['/create-todo']">Create Todo</a>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col-2">
+                <input #searchTerm type="text" placeholder="Search todo" class="form-control search-bar" (keyup.enter)="searchTodo(searchTerm.value)"/>
+            </div>
+            <span class="input-group-btn">
+                <button class="btn btn-primary search-addon" (click)="searchTodo(searchTerm.value)"><i class="fa fa-search"></i><span class="search-text"> Search</span></button>
+            </span>
+        </div>
+
+        <div class="row todos" *ngIf="todoList.length > 0">
+          <div class="col-2">Title</div>
+          <div class="col-2">Category</div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+        </div>
+        <div class="row list" *ngFor="let todo of todoList">
+          <div class="col-2">
+            <a href="#" (click)="openTodo(todo.id)">{{todo.title}}</a>
+          </div>
+          <div class="col-2">
+            {{todo.category}}
+          </div>
+          <div class="col-2"><button type="button" class="btn btn-danger btn-sm" (click)="deleteTodo(todo.id)">Delete</button></div>
+          <div class="col-2"><button type="button" class="btn btn-info btn-sm" (click)="editTodo(todo.id)">Edit</button></div>
+        </div>
+
+        <div class="page-controls">
+            <div class="row">
+                <div class="col-2">
+                    <i class="fa fa-chevron-left" style="font-size:36px" (click)="previous()"></i>
+                </div>
+                <div class="col-2">
+                    <i class="fa fa-chevron-right" style="font-size:36px" (click)="next()"></i>
+                </div>
+        </div>
+            
+            
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="view-todo-modal" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">View Todo</h5>
+        <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group" *ngIf="todoToView != null">
+          <div class="row" style="margin-top: 1%">
+            <div class="col-3" style="font-weight: bold">
+                Title
+            </div>
+            <div class="col-6">
+                {{todoToView.title}}
+            </div>
+            
+          </div>
+
+          <div class="row" style="margin-top: 1%">
+              <div class="col-3" style="font-weight: bold">
+                  Description
+              </div>
+              <div class="col-6">
+                  {{todoToView.description}}
+              </div>
+          </div>
+
+          <div class="row" style="margin-top: 1%">
+              <div class="col-3" style="font-weight: bold">
+                  Category
+              </div>
+              <div class="col-6">
+                  {{todoToView.category}}
+              </div>
+          </div>
+
+          <div class="row" style="margin-top: 1%">
+            <div class="col-3" style="font-weight: bold">
+                Due date
+            </div>
+            <div class="col-6">
+                {{todoToView.dueDate | date :'short'}}  
+            </div>
+            
+          </div>
+
+          <div class="row" style="margin-top: 1%">
+            <div class="col-3" style="font-weight: bold">
+                Status
+            </div>
+
+            <div class="col-6">
+                {{todoToView.status}}
+              </div>
+          </div>
+
+          <div class="row" style="margin-top: 2%">
+            <div class="col-6" *ngIf="todoToView.status === 'INCOMPLETE'">
+                <p><input type="checkbox" (change)="markComplete( $event.target.checked)" />Mark as complete</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" (click)="saveTodoStatus()" [disabled]="todoToView.status === 'COMPLETE'">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
